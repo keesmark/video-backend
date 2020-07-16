@@ -1,0 +1,54 @@
+version: "3.5"
+
+services:
+  php:
+    container_name: video-backend
+    build:
+      context: php
+    volumes:
+      - ../:/var/www/app
+    depends_on:
+      - db
+
+  front:
+    container_name: video-front
+    build:
+      context: ../../front/docker
+    ports:
+      - 3000:3000
+    volumes:
+      - ../../front/:/app
+    working_dir: /app
+    tty: true
+
+  nginx:
+    image: nginx
+    container_name: video-nginx
+    ports:
+      - 80:80
+    volumes:
+      - ../:/var/www/app
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+
+  db:
+    image: mysql:8.0
+    container_name: video-db
+    environment:
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - TZ=${TZ}
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./db/data:/var/lib/mysql
+      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./db/sql:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
+
+networks:
+  default:
+    name: video_network
