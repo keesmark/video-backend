@@ -1,7 +1,7 @@
 version: "3.5"
 
 services:
-  php:
+  backend:
     container_name: video-backend
     build:
       context: php
@@ -13,11 +13,11 @@ services:
   front:
     container_name: video-front
     build:
-      context: ../../front/docker
+      context: ../../video-front/docker
     ports:
       - 3000:3000
     volumes:
-      - ../../front/:/app
+      - ../../video-front/:/app
     working_dir: /app
     tty: true
 
@@ -30,7 +30,7 @@ services:
       - ../:/var/www/app
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
-      - php
+      - backend
 
   db:
     image: mysql:8.0
