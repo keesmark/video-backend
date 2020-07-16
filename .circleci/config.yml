@@ -8,7 +8,7 @@ jobs:
     docker:
       - image: circleci/php:7.4-node-browsers
       - image: circleci/mysql:8.0
-        
+
     environment:
       - APP_DEBUG: true
       - APP_ENV: testing
@@ -48,7 +48,7 @@ jobs:
 
       # prepare the database
       - run: touch storage/testing.sqlite
-      - run: php artisan migrate --env=testing --database=sqlite_testing --force
+      - run: php artisan migrate
 
       # run tests with phpunit or codecept
       - run: ./vendor/bin/phpunit
