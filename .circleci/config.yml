@@ -22,12 +22,12 @@ jobs:
     
           working_directory: ~/circle-test
 
-     environment:
-      - APP_DEBUG: true
-      - APP_ENV: testing
-      - APP_KEY: base64:NpTYndlJqX6A8J/ATKvj1yD2YxSLo6uWUOjLAjWubR8=
-      - DB_CONNECTION: circle_test
-      - MYSQL_ALLOW_EMPTY_PASSWORD: true
+    environment:
+      APP_DEBUG: true
+      APP_ENV: testing
+      APP_KEY: base64:NpTYndlJqX6A8J/ATKvj1yD2YxSLo6uWUOjLAjWubR8=
+      DB_CONNECTION: circle_test
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
 
     steps:
       - checkout
