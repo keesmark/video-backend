@@ -9,11 +9,11 @@ jobs:
       - image: circleci/php:7.4-node-browsers
       - image: circleci/mysql:8.0
     
-    envirionment:
-      APP_DEBUG: true
-      APP_ENV: testing
-      DB_CONNECTION: circle_test
-      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      envirionment:
+        APP_DEBUG: true
+        APP_ENV: testing
+        DB_CONNECTION: circle_test
+        MYSQL_ALLOW_EMPTY_PASSWORD: true
 
     steps:
       - checkout
