@@ -22,8 +22,8 @@ jobs:
       - checkout
 
       - run: 
-        name: Docker php extensions install
-        command: sudo docker-php-ext-install pdo_mysql
+          name: Docker php extensions install
+          command: sudo docker-php-ext-install pdo_mysql
 
       - restore_cache:
           keys:
@@ -31,8 +31,8 @@ jobs:
             - v1-dependencies-
 
       - run:
-        name: Install PHP libraries
-        command: composer install -n --prefer-dist
+          name: Install PHP libraries
+          command: composer install -n --prefer-dist
 
       - save_cache:
           key: v1-dependencies-{{ checksum "composer.json" }}
@@ -40,12 +40,13 @@ jobs:
             - ./vendor
 
       - run:
-        name: migrate
-        command: php artisan migrate
+          name: migrate
+          command: php artisan migrate
+          
       - run:
-        name: seeder
-        command: php artisan db:seed
+          name: seeder
+          command: php artisan db:seed
 
       - run:
-        name: Run phpunit
-        command: ./vendor/bin/phpunit
+          name: Run phpunit
+          command: ./vendor/bin/phpunit
