@@ -7,14 +7,24 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.4-node-browsers
-      - image: circleci/mysql:8.0
+        environment:
+          APP_KEY: base64:Ma+dUJpRkFrjJ7j0SL/TojbaB4APWMr5O7uYOPLEwYc=
+          DB_USER: root
+          DB_HOST: '127.0.0.1'
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          DB_CONNECTION: circleci_test
+      
+      - image: circleci/mysql:8.0-ram
 
-    environment:
-      - APP_DEBUG: true
-      - APP_ENV: testing
-      - APP_KEY: base64:Ma+dUJpRkFrjJ7j0SL/TojbaB4APWMr5O7uYOPLEwYc=
-      - DB_CONNECTION: circleci_test
-      - MYSQL_ALLOW_EMPTY_PASSWORD: true
+        environment:
+          APP_DEBUG: true
+          APP_ENV: testing
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_DATABASE: circleci_test
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_ROOT_PASSWORD: ''
+          MYSQL_USER: root
+          MYSQL_PASSWORD: password
 
     steps:
       - checkout
