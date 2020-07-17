@@ -6,10 +6,10 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.4-fmp
+      - image: circleci/php:7.4-fpm-node-browserse
       - image: circleci/mysql:8.0
         command: mysqld --default-authentication-plugin=mysql_native_password
-        envirionment: # MySQLの初期設定
+        envirionment:
           - APP_DEBUG: true
           - APP_ENV: circle
           - DB_CONNECTION: circle_test
