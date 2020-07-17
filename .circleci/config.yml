@@ -13,7 +13,7 @@ jobs:
       - APP_DEBUG: true
       - APP_ENV: testing
       - APP_KEY: base64:Ma+dUJpRkFrjJ7j0SL/TojbaB4APWMr5O7uYOPLEwYc=
-      - DB_CONNECTION: circleci
+      - DB_CONNECTION: circleci_test
       - MYSQL_ALLOW_EMPTY_PASSWORD: true
 
     steps:
@@ -49,6 +49,7 @@ jobs:
       # prepare the database
       - run: touch storage/testing.sqlite
       - run: php artisan migrate
+      - run: php artisan db:seed
 
       # run tests with phpunit or codecept
       - run: ./vendor/bin/phpunit
