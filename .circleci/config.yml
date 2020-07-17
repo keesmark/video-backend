@@ -10,14 +10,14 @@ jobs:
       - image: circleci/mysql:8.0
     
     envirionment:
-      - APP_DEBUG: true
-      - APP_ENV: testing
-      - DB_CONNECTION: circle_test
-      - MYSQL_ALLOW_EMPTY_PASSWORD: true
+      APP_DEBUG: true
+      APP_ENV: testing
+      DB_CONNECTION: circle_test
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
 
     steps:
       - checkout
-      
+
       - run: sudo docker-php-ext-install pdo_mysql
 
 
