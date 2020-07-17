@@ -36,8 +36,8 @@ jobs:
             - ./vendor
 
       # prepare the database
-      - run: php artisan migrate
-      - run: php artisan db:seed
+      - run: php artisan migrate --database=circle_test
+      - run: php artisan db:seed --database=circle_test
 
       # run tests with phpunit or codecept
       - run: ./vendor/bin/phpunit
