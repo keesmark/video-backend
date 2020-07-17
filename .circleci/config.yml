@@ -7,12 +7,12 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.4-node-browsers
-      - image: circleci/mysql:8.0
-        envirionment:
-          APP_DEBUG: true
-          APP_ENV: testing
-          DB_CONNECTION: circle_test
-          MYSQL_ALLOW_EMPTY_PASSWORD: true
+      # - image: circleci/mysql:8.0
+      #   envirionment:
+      #     APP_DEBUG: true
+      #     APP_ENV: testing
+      #     DB_CONNECTION: circle_test
+      #     MYSQL_ALLOW_EMPTY_PASSWORD: true
 
     steps:
       - checkout
@@ -35,9 +35,9 @@ jobs:
           paths:
             - ./vendor
 
-      # prepare the database
-      - run: php artisan migrate --database=circle_test
-      - run: php artisan db:seed --database=circle_test
+      # # prepare the database
+      # - run: php artisan migrate --database=circle_test
+      # - run: php artisan db:seed --database=circle_test
 
       # run tests with phpunit or codecept
       - run: ./vendor/bin/phpunit
