@@ -1,7 +1,3 @@
-# PHP CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-php/ for more details
-#
 version: 2
 jobs:
   build:
@@ -65,3 +61,13 @@ jobs:
       - run:
           name: Run phpunit
           command: ./vendor/bin/phpunit
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          filters:
+            branches:
+              only: master
