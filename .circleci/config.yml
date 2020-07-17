@@ -40,9 +40,9 @@ jobs:
             - ./vendor
 
       - run:
-        name: cpy env
-        command: cp .env.testing .env
-        
+          name: cpy env
+          command: cp .env.testing .env
+
       - run:
           name: migrate
           command: php artisan migrate
