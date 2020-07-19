@@ -2,21 +2,23 @@ FROM php:7.4-fpm
 COPY php.ini /usr/local/etc/php/
 
 RUN apt-get update \
-  && apt-get install -y libzip-dev \ mariadb-client \
+  && apt-get install -y libzip-dev \
   && docker-php-ext-install zip pdo_mysql \
-  && curl -sL https://deb.nodesource.com/setup_12.x | bash - && apt-get install -y nodejs && npm install -g yarn \
-  && apt-get install -y git \
-  && apt-get install vim
+  && curl -sL https://deb.nodesource.com/setup_12.x | bash - && apt-get install -y nodejs \
+  && apt-get install -y \
+  git \
+  vim \
+  curl \
+  libpng-dev \
+  libonig-dev \
+  libxml2-dev \
+  zip \
+  unzip
 
-COPY --from=composer /usr/bin/composer /usr/bin/composer
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-ENV COMPOSER_ALLOW_SUPERUSER 1
-
-ENV COMPOSER_HOME /composer
-
-ENV PATH $PATH:/composer/vendor/bin
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 
 WORKDIR /var/www/app
 
-RUN composer global require "laravel/installer"
